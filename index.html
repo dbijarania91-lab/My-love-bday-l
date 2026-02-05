@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Aaru!</title>
+    <style>
+        /* Importing 'Dancing Script' (Elegant) and 'Pacifico' (Cute Cursive) */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Fredoka+One&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            /* Default to bubbly font */
+            font-family: 'Fredoka One', cursive; 
+            background: linear-gradient(135deg, #ffe6fa 0%, #ffcce6 50%, #ffe6fa 100%);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Background Floating Hearts --- */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart-bg {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 10px rgba(255, 150, 200, 0.8);
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Shared Card Styles --- */
+        .card {
+            background: rgba(255, 235, 245, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px rgba(255, 130, 170, 0.25);
+            padding: 30px 20px;
+            width: 380px;
+            max-width: 90%; 
+            text-align: center;
+            z-index: 10;
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        /* Strict Hiding Class */
+        .hidden {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* --- LOVE FONTS (Screens 2, 3 & Popup) --- */
+        .love-font-header {
+            font-family: 'Pacifico', cursive; /* Thick cursive */
+            color: #ff6699;
+            text-shadow: 3px 3px 0px #fff, 0px 0px 10px rgba(255,100,150,0.3);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+
+        .love-font-text {
+            font-family: 'Dancing Script', cursive; /* Elegant cursive */
+            color: #d1477f;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+        }
+
+        /* --- Screen 1: Locker --- */
+        .screen {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            height: 60px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            letter-spacing: 8px;
+            color: #ff6699;
+            box-shadow: inset 0 4px 8px rgba(255, 182, 193, 0.3);
+            border: 2px solid #ffe4e1;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .key {
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            font-size: 1.4rem;
+            font-family: 'Fredoka One', cursive; /* Numbers stay readable */
+            color: #ff6699;
+            cursor: pointer;
+            box-shadow: 0 4px 0px rgba(255, 130, 170, 0.3);
+            transition: 0.1s;
+        }
+
+        .key:active { transform: translateY(4px); box-shadow: none; }
+
+        /* --- Screen 2: Photo --- */
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.25);
+            background: #fff;
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- Screen 3: Video --- */
+        .video-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+            margin-bottom: 20px;
+            background: #000;
+            position: relative;
+            height: 200px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Buttons --- */
+        .main-btn {
+            background: linear-gradient(to bottom, #ff9eb5, #ff6699);
+            color: white;
+            border: 3px solid white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-family: 'Pacifico', cursive;
+            cursor: pointer;
+            box-shadow: 0 5px 0px #e05585, 0 10px 20px rgba(0,0,0,0.15);
+            width: 100%;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .main-btn:active { transform: translateY(4px); box-shadow: 0 1px 0px #e05585; }
+
+        /* --- Final Message Popup --- */
+        .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(80, 20, 40, 0.7); 
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup-overlay.show { opacity: 1; pointer-events: auto; }
+
+        .message-card {
+            background: #fff0f5;
+            padding: 25px 20px;
+            border-radius: 25px;
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            border: 4px solid #ffb6c1;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .long-msg {
+            font-family: 'Dancing Script', cursive; 
+            color: #c75b8a; 
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            text-align: left;
+            white-space: pre-wrap; 
+        }
+        
+        .close-btn {
+            background: #ff6699;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Animation Classes */
+        .fade-out { opacity: 0; transform: translate(-50%, -50%) scale(0.8) !important; pointer-events: none; }
+        .fade-in { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
+        .shake { animation: shake 0.4s; }
+        @keyframes shake { 0%,100%{transform:translate(-50%, -50%)} 25%{transform:translate(-60%, -50%)} 75%{transform:translate(-40%, -50%)} }
+
+    </style>
+</head>
+<body>
+
+    <div class="hearts-container" id="hearts-bg"></div>
+
+    <div class="card" id="screen1">
+        <h1 class="love-font-header" style="font-size: 2.2rem;">Hey Aaru! 🌸</h1>
+        <p class="love-font-text" style="font-size: 1.5rem; color: white;">Unlock your b'day wishes...</p>
+        
+        <div class="screen" id="display"></div>
+
+        <div class="keypad">
+            <button class="key" onclick="press(1)">1</button>
+            <button class="key" onclick="press(2)">2</button>
+            <button class="key" onclick="press(3)">3</button>
+            <button class="key" onclick="press(4)">4</button>
+            <button class="key" onclick="press(5)">5</button>
+            <button class="key" onclick="press(6)">6</button>
+            <button class="key" onclick="press(7)">7</button>
+            <button class="key" onclick="press(8)">8</button>
+            <button class="key" onclick="press(9)">9</button>
+            <button class="key" style="background:#ffb6c1; color:white;" onclick="clearScreen()">✕</button>
+            <button class="key" onclick="press(0)">0</button>
+            <button class="key" style="background:#ffb6c1; color:white;" onclick="submitCode()">➜</button>
+        </div>
+        <p style="margin-top:20px; color:white; font-size:0.8rem; background:rgba(255,100,150,0.3); padding:5px 10px; border-radius:15px; display:inline-block; font-family:'Nunito', sans-serif;">Hint: Find secret code on cake order...</p>
+    </div>
+
+    <div class="card hidden" id="screen2">
+        <div class="photo-frame">
+            <img src="photo.jpg" onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=Aaru&eyebrows=defaultNatural&mouth=smile'" alt="Aaru">
+        </div>
+        <h1 class="love-font-header">Ready, My Love? 💖</h1>
+        <p class="love-font-text">I have a little surprise for you...</p>
+        <button class="main-btn" onclick="goToVideoScreen()">Let's Celebrate! 🎉</button>
+    </div>
+
+    <div class="card hidden" id="screen3">
+        <h1 class="love-font-header">Happy Birthday! 🎂</h1>
+        
+        <div class="video-container">
+            <video controls id="mainVideo">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <p class="love-font-text" style="font-size:1.5rem; margin-bottom:10px;">Make a wish... ✨</p>
+        <button class="main-btn" onclick="openGiftMessage()">🎁 Opening gifts...</button>
+    </div>
+
+    <div class="popup-overlay" id="error-popup">
+        <div class="message-card">
+            <span style="font-size: 3rem; display:block; margin-bottom:10px;">🥺</span>
+            <h3 class="love-font-header" style="font-size:1.8rem;">Oopsie Daisy!</h3>
+            <p class="love-font-text" style="font-size:1.4rem;">That's not the right code, cutie. Please try again!</p>
+            <button class="close-btn" onclick="closeError()">Okay!</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="message-popup">
+        <div class="message-card">
+            <h3 class="love-font-header" style="margin-bottom:15px;">My Heartfelt Message 💌</h3>
+            <div class="long-msg">
+Hey... I know I know this is not enough for your special day but... I can't make it... 🥺
+
+Merko milna tha but situation hi nhi ho paai how much I try hard.. uska ulta hi hotaa... 
+
+Anyway soon I am there! Btw Happy Birthday my love 💕... hope tumhare saare dreams pure hoo... and tum duniya ki sabse lucky girl bano, sabki fav, sabse strong... 
+
+Love you misss hotuuuuuuu... chalo ab enjoy karo... and sorry I couldn't make it.. byeee ❤️
+            </div>
+            <button class="close-btn" onclick="alert('Love you! ❤️')">Love You Too!</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Variables ---
+        let currentInput = "";
+        const correctCode = "1430";
+        const display = document.getElementById('display');
+        const s1 = document.getElementById('screen1');
+        const s2 = document.getElementById('screen2');
+        const s3 = document.getElementById('screen3');
+        const errorPopup = document.getElementById('error-popup');
+        const msgPopup = document.getElementById('message-popup');
+
+        // --- Back Button Logic (History API) ---
+        
+        // 1. Initialize History on Load
+        window.onload = function() {
+            // Replace initial state with Step 1
+            history.replaceState({step: 1}, "Locked", "");
+        };
+
+        // 2. Listen for "Back" button press
+        window.onpopstate = function(event) {
+            if (event.state) {
+                // If we are going back to Step 1 (Locker)
+                if (event.state.step === 1) {
+                    showScreenDirectly(s1);
+                } 
+                // If we are going back to Step 2 (Photo)
+                else if (event.state.step === 2) {
+                    showScreenDirectly(s2);
+                }
+            }
+        };
+
+        // Helper to show screen instantly (for back button navigation)
+        function showScreenDirectly(screenToShow) {
+            // Hide all
+            s1.classList.add('hidden');
+            s2.classList.add('hidden');
+            s3.classList.add('hidden');
+            msgPopup.classList.remove('show'); // Close popup if open
+            
+            // Show Target
+            screenToShow.classList.remove('hidden');
+            screenToShow.classList.remove('fade-out');
+            screenToShow.classList.add('fade-in');
+            screenToShow.style.display = 'block';
+        }
+
+
+        // --- Normal Navigation Logic ---
+
+        function press(num) {
+            if (currentInput.length < 4) {
+                currentInput += num;
+                updateDisplay();
+                if(currentInput.length === 4) setTimeout(submitCode, 300);
+            }
+        }
+
+        function clearScreen() { currentInput = ""; updateDisplay(); }
+
+        function updateDisplay() {
+            let placeholder = "";
+            for(let i=0; i<currentInput.length; i++) placeholder += "🌸"; 
+            display.innerText = placeholder;
+        }
+
+        function submitCode() {
+            if (currentInput === correctCode) {
+                // PUSH STATE: We are moving to Step 2
+                history.pushState({step: 2}, "Surprise", "#surprise");
+                
+                // Animate transition
+                s1.classList.add('fade-out');
+                setTimeout(() => {
+                    s1.classList.add('hidden');
+                    s1.style.display = 'none';
+                    
+                    s2.classList.remove('hidden');
+                    s2.style.display = 'block'; 
+                    void s2.offsetWidth; 
+                    s2.classList.add('fade-in');
+                    createBurst();
+                }, 400);
+            } else {
+                showError();
+            }
+        }
+
+        function goToVideoScreen() {
+            // PUSH STATE: We are moving to Step 3
+            history.pushState({step: 3}, "Celebration", "#celebrate");
+
+            s2.classList.remove('fade-in');
+            s2.classList.add('fade-out');
+            
+            setTimeout(() => {
+                s2.classList.add('hidden');
+                s2.style.display = 'none';
+                
+                s3.classList.remove('hidden');
+                s3.style.display = 'block';
+                void s3.offsetWidth;
+                s3.classList.add('fade-in');
+                
+                // Auto play video
+                const vid = document.getElementById('mainVideo');
+                if(vid) vid.play();
+                
+                createBurst();
+            }, 400);
+        }
+
+        function openGiftMessage() {
+            msgPopup.classList.add('show');
+            createBurst();
+        }
+
+        function showError() {
+            currentInput = "";
+            updateDisplay();
+            errorPopup.classList.add('show');
+            s1.classList.add('shake');
+            setTimeout(() => s1.classList.remove('shake'), 500);
+        }
+
+        function closeError() { errorPopup.classList.remove('show'); }
+
+        // --- Heart Animation ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            const shapes = ['❤', '💖', '🌸', '✨'];
+            heart.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 8 + 7 + "s"; 
+            heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+            heart.style.filter = `blur(${Math.random() * 3}px)`;
+            document.getElementById('hearts-bg').appendChild(heart);
+            setTimeout(() => heart.remove(), 15000);
+        }
+        setInterval(createHeart, 500);
+
+        function createBurst() {
+            for(let i=0; i<30; i++) setTimeout(createHeart, i*50);
+        }
+    </script>
+</body>
+</html>
